@@ -57,20 +57,10 @@
 \renewcommand{\geq}{\geqslant}
 
 
-\title{\textbf{Image Colorization using DCGANs}}
+\title{\textbf{Image Colorization and Upscaling using DCGANs}}
 
 \author{
-    \texorpdfstring{%
-    \begin{columns}
-        \column{.5\linewidth}
-        \centering
-        \textbf{Nathan Frison} \\ \texttt{nathan.frison@ens.psl.eu}
-        \column{.5\linewidth}
-        \centering
-        \textbf{Antoine Groudiev} \\ \texttt{antoine.groudiev@ens.psl.eu}
-    \end{columns}
-    }
-    {Antoine Groudiev, Silviu Maniu}
+    Nathan Frison, Hubert Gruniaux, Antoine Groudiev
 }
 
 \titlegraphic{\includegraphics[height=1.6cm]{logo-ens-psl.png}}
@@ -88,11 +78,28 @@
             \node at (0,-2.8) {Grayscale image};
 
             \draw[->, very thick] (2,-.2) -- ++(1,0);
-            \draw[draw=black, thick, fill=orange!60, rounded corners] (3.2,-1.5) rectangle ++(3.5,2.5) node[pos=.5] {Neural network};
+            \draw[draw=black, thick, fill=orange!60, rounded corners] (3.2,-1.5) rectangle ++(3.5,2.5) node[pos=.5] {Neural Network};
             \draw[->, very thick] (7,-.2) -- ++(1,0);
 
             \node at (10,0) {\includegraphics[width=.25\textwidth]{plante.jpg}};
             \node at (10,-2.8) {Colorized image};
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{The image upscaling problem}
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+            \node at (0,0) {\includegraphics[width=.25\textwidth]{plante-low-res.jpg}};
+            \node at (0,-2.8) {Low-resolution image};
+
+            \draw[->, very thick] (2,-.2) -- ++(1,0);
+            \draw[draw=black, thick, fill=orange!60, rounded corners] (3.2,-1.5) rectangle ++(3.5,2.5) node[pos=.5] {Neural network};
+            \draw[->, very thick] (7,-.2) -- ++(1,0);
+
+            \node at (10,0) {\includegraphics[width=.25\textwidth]{plante.jpg}};
+            \node at (10,-2.8) {High-resolution image};
         \end{tikzpicture}
     \end{figure}
 \end{frame}
@@ -128,18 +135,26 @@
         \item The generator $G_{\theta_G}$ takes a random noise vector $z$ as input and outputs an image $G_{\theta_G}(z)$.
         \item The discriminator $D_{\theta_D}$ takes an image $x$ as input and outputs a probability $D_{\theta_D}(x)$ that the image is real.
         \item Minimax game problem:
-        \begin{equation}
+        \begin{equation*}
             \min_{\theta_G}\max_{\theta_D} V(G_{\theta_G}, D_{\theta_D}) = \min_{\theta_G}\max_{\theta_D}\mathbb{E}_x[\log D_{\theta_D}(x)] + \mathbb{E}_z[\log(1 - D_{\theta_D}(G_{\theta_G}(z)))]
-        \end{equation}
+        \end{equation*}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Generative Adversarial Networks (GANs)}{Image colorization}
-    Change the generator to fit the colorization problem using conditional GANs:
+\begin{frame}{Generative Adversarial Networks (GANs)}{Image colorization or upscaling}
+    Change the generator to fit the colorization/upscaling problem using conditional GANs:
     \begin{itemize}
-        \item Replace the noise vector $z$ by a grayscale image $z$.
-        \item The generator $G_{\theta_G}$ takes a grayscale image $z$ as input and outputs a colorized image $G_{\theta_G}(z)$.
-        \item The discriminator receives both the colorized image and the grayscale image (condition) as input, and outputs a probability $D_{\theta_D}(x|z)$ that the image is real.
+        \item Replace the noise vector $z$ by a grayscale/lows-res image $z$.
+        \item The generator $G_{\theta_G}$ takes a grayscale/lows-res image $z$ as input and outputs an enhanced image $G_{\theta_G}(z)$.
+        \item The discriminator receives both the enhanced image and the enhanced image (condition) as input, and outputs a probability $D_{\theta_D}(x|z)$ that the image is real.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Possible approaches}
+    \begin{itemize}
+        \item Colorize then upscale: train a colorization GAN and an upscaling GAN separately
+        \item Upscale then colorize: train an upscaling GAN and a colorization GAN separately
+        \item Joint training: train a single GAN to perform both tasks
     \end{itemize}
 \end{frame}
 
@@ -148,6 +163,7 @@
         \item Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., ... \& Bengio, Y. (2014). Generative adversarial nets. \emph{Advances in neural information processing systems}, 27.
         \item Nazeri, Kamyar, Eric Ng, and Mehran Ebrahimi. "Image colorization using generative adversarial networks." \emph{Articulated Motion and Deformable Objects: 10th International Conference, AMDO 2018, Palma de Mallorca, Spain, July 12-13, 2018, Proceedings 10}. Springer International Publishing, 2018.
         \item Anwar, Saeed, et al. "Image colorization: A survey and dataset." \emph{Information Fusion} (2024): 102720.
+        \item Wang, Xintao, et al. "Esrgan: Enhanced super-resolution generative adversarial networks." \emph{Proceedings of the European conference on computer vision (ECCV) workshops}. 2018.
     \end{enumerate}
 \end{frame}
 
