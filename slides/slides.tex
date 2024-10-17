@@ -24,7 +24,6 @@
 
 \usepackage{mathtools}
 \usepackage{wrapfig}
-\usepackage{enumitem}
 \usepackage{tikz}
 \usepackage{xcolor}
 \usetikzlibrary{positioning}
@@ -81,7 +80,7 @@
 \begin{document}
 \frame{\titlepage}
 
-\begin{frame}{Image colorization}
+\begin{frame}{The image colorization problem}
     \begin{figure}
         \centering
         \begin{tikzpicture}
@@ -124,8 +123,32 @@
     \end{figure}
 \end{frame}
 
+\begin{frame}{Generative Adversarial Networks (GANs)}{Generation}
+    \begin{itemize}
+        \item The generator $G_{\theta_G}$ takes a random noise vector $z$ as input and outputs an image $G_{\theta_G}(z)$.
+        \item The discriminator $D_{\theta_D}$ takes an image $x$ as input and outputs a probability $D_{\theta_D}(x)$ that the image is real.
+        \item Minimax game problem:
+        \begin{equation}
+            \min_{\theta_G}\max_{\theta_D} V(G_{\theta_G}, D_{\theta_D}) = \min_{\theta_G}\max_{\theta_D}\mathbb{E}_x[\log D_{\theta_D}(x)] + \mathbb{E}_z[\log(1 - D_{\theta_D}(G_{\theta_G}(z)))]
+        \end{equation}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Generative Adversarial Networks (GANs)}{Image colorization}
+    Change the generator to fit the colorization problem using conditional GANs:
+    \begin{itemize}
+        \item Replace the noise vector $z$ by a grayscale image $z$.
+        \item The generator $G_{\theta_G}$ takes a grayscale image $z$ as input and outputs a colorized image $G_{\theta_G}(z)$.
+        \item The discriminator receives both the colorized image and the grayscale image (condition) as input, and outputs a probability $D_{\theta_D}(x|z)$ that the image is real.
+    \end{itemize}
+\end{frame}
+
 \begin{frame}{References}
-    
+    \begin{enumerate}
+        \item Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., ... \& Bengio, Y. (2014). Generative adversarial nets. \emph{Advances in neural information processing systems}, 27.
+        \item Nazeri, Kamyar, Eric Ng, and Mehran Ebrahimi. "Image colorization using generative adversarial networks." \emph{Articulated Motion and Deformable Objects: 10th International Conference, AMDO 2018, Palma de Mallorca, Spain, July 12-13, 2018, Proceedings 10}. Springer International Publishing, 2018.
+        \item Anwar, Saeed, et al. "Image colorization: A survey and dataset." \emph{Information Fusion} (2024): 102720.
+    \end{enumerate}
 \end{frame}
 
 \end{document}
