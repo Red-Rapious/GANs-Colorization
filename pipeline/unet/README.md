@@ -1,0 +1,3 @@
+This implementation of U-Net is taken from the [Pytorch-UNet](https://github.com/milesial/Pytorch-UNet/tree/master) repository, licensed under the GNU General Public License v3.0. 
+
+While this implementation is aimed at solving a segmentation task, the paper [Image colorization using generative adversarial networks.](https://arxiv.org/abs/1803.05400) uses a similar architecture for image colorization.
