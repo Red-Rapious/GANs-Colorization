@@ -163,12 +163,11 @@
 
     Two different possibilities:
     \begin{itemize}
-        \item \textbf{Two-step approach}: colorize and upscale the image using two GANs trained separately.
+        \item \textbf{Two-step approach}: colorize and upscale the image using two networks trained separately.
         \item \textbf{Single-step approach}: colorize and upscale the image at the same time, using a single GAN trained.
     \end{itemize}
 \end{frame}
 
-\subsection{LAB color space}
 \begin{frame}{Using the $\mathrm{LAB}$ color space}
     \textbf{Idea for colorization}: instead of trying to learn the three $\mathrm{RGB}$ channels, learn only the two channels $A$ and $B$ of the $\mathrm{LAB}$ color space, given the channel $L$.
     \vskip .8em
@@ -181,7 +180,7 @@
     \end{figure}
 \end{frame}
 
-\subsection{U-Net model}
+\subsection{Models}
 \begin{frame}{Generator model: U-Net}
     \center As a generator, we use the U-Net model, mostly used in segmentation tasks.
     \begin{figure}
@@ -191,24 +190,112 @@
     \end{figure}
 \end{frame}
 
-\section{Results}
-\subsection{Colorization results}
-\begin{frame}{Results: colorization}
+\begin{frame}{Upscaling model: ESPCN}
+    \center As a generator, we use the ESPCN model.
     \begin{figure}
-        \centering
-        \includegraphics[width=.8\textwidth]{colorization-1.png}
-        \caption{Colorization results for U-Net trained on Imagenette (XX epochs)}
+        \hspace{1.2cm}
+        \includegraphics[width=\textwidth]{ESPCN.png}
+        \caption{Architecture of the ESPCN model}
     \end{figure}
 \end{frame}
 
-\subsection{Upscaling results}
-\begin{frame}{Results: upscaling}
-
+\section{Results}
+\subsection{Separate training results}
+\begin{frame}
+    \tableofcontents[currentsubsection]
 \end{frame}
 
-\subsection{Integrated approach results}
-\begin{frame}{Results: integrated approach}
+\begin{frame}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.75\textwidth]{demo-pipeline/building.png}
+        \caption{Colorization results for U-Net trained on Imagenette (separate training)}
+    \end{figure}
+\end{frame}
 
+\begin{frame}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.75\textwidth]{demo-pipeline/chainsaw.png}
+        \caption{Colorization results for U-Net trained on Imagenette (separate training)}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.75\textwidth]{demo-pipeline/fish.png}
+        \caption{Colorization results for U-Net trained on Imagenette (separate training)}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.75\textwidth]{demo-pipeline/building2.png}
+        \caption{Colorization results for U-Net trained on Imagenette (separate training)}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.75\textwidth]{demo-pipeline/truc.png}
+        \caption{Colorization results for U-Net trained on Imagenette (separate training)}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.75\textwidth]{demo-pipeline/fish2.png}
+        \caption{Colorization results for U-Net trained on Imagenette (separate training)}
+    \end{figure}
+\end{frame}
+
+\subsection{Joint training results}
+\begin{frame}
+    \tableofcontents[currentsubsection]
+\end{frame}
+
+\begin{frame}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.75\textwidth]{demo-both/chainsaw.png}
+        \caption{Colorization results for U-Net trained on Imagenette (joint training)}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.75\textwidth]{demo-both/cor.png}
+        \caption{Colorization results for U-Net trained on Imagenette (joint training)}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.75\textwidth]{demo-both/golf.png}
+        \caption{Colorization results for U-Net trained on Imagenette (joint training)}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.75\textwidth]{demo-both/building.png}
+        \caption{Colorization results for U-Net trained on Imagenette (joint training)}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.75\textwidth]{demo-both/truc.png}
+        \caption{Colorization results for U-Net trained on Imagenette (joint training)}
+    \end{figure}
 \end{frame}
 
 \begin{frame}{References}
@@ -217,6 +304,7 @@
         \item Nazeri, Kamyar, Eric Ng, and Mehran Ebrahimi. "Image colorization using generative adversarial networks." \emph{Articulated Motion and Deformable Objects: 10th International Conference, AMDO 2018, Palma de Mallorca, Spain, July 12-13, 2018, Proceedings 10}. Springer International Publishing, 2018.
         \item Anwar, Saeed, et al. "Image colorization: A survey and dataset." \emph{Information Fusion} (2024): 102720.
         \item Wang, Xintao, et al. "Esrgan: Enhanced super-resolution generative adversarial networks." \emph{Proceedings of the European conference on computer vision (ECCV) workshops}. 2018.
+        \item Shi, Wenzhe, et al. "Real-Time Single Image and Video Super-Resolution Using an Efficient Sub-Pixel Convolutional Neural Network". 2016.
     \end{enumerate}
 \end{frame}
 
